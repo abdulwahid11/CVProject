@@ -23,22 +23,28 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String MY_CODE = "R3JoeBpA271NzmQ8";
-    private static final int CAMERA_ROTATION =0 ;
-    private IsItYouSdk iiy;
-    int REQUEST_CODE = 0;
-    public static int count = 0;
 
+    int REQUEST_CODE = 0;
+    private IsItYouSdk iiy;
     private Bitmap myBitmap;
+    public static int count = 0;
+    private static final int CAMERA_ROTATION = 0 ;
+    private static final String MY_CODE = "R3JoeBpA271NzmQ8";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         iiy = IsItYouSdk.getInstance(getApplicationContext());
         iiy.setAS(false);
+
         int initResult = iiy.init(MY_CODE, CAMERA_ROTATION);
         Toast.makeText(this, ""+initResult, Toast.LENGTH_SHORT).show();
+
+        String initUserResult = iiy.initUser("Guest");
+        Toast.makeText(this, initUserResult, Toast.LENGTH_LONG).show();
+
         Button capture = (Button) findViewById(R.id.btnCapture);
         capture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
