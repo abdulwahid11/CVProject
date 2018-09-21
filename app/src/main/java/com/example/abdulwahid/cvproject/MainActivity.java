@@ -58,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             myBitmap=photo;
+
             int response=iiy.saveEnrollment(getBytesFromBitmap(myBitmap),0);
-
             Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
-
-
         }
     }
     public byte[] getBytesFromBitmap(Bitmap bitmap) {
